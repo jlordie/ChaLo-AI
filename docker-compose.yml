@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: chalo-postgres
+    environment:
+      POSTGRES_USER: chalo
+      POSTGRES_PASSWORD: chalopassword
+      POSTGRES_DB: chalo_db
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chalo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - chalo-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: chalo-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - chalo-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  chalo-network:
+    driver: bridge

@@ -62,7 +62,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             {error && (
-              <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-red-900/20 border border-red-700/50 text-red-200 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}

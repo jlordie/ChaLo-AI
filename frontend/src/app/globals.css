@@ -1,0 +1,25 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+}
+
+* {
+  @apply border-gray-700;
+}
+
+body {
+  @apply bg-dark-900 text-white antialiased;
+}
+
+button:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+input:disabled,
+textarea:disabled {
+  @apply cursor-not-allowed opacity-50;
+}

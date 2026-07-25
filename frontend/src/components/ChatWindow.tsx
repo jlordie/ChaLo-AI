@@ -172,7 +172,7 @@ export default function ChatWindow({ userId }: { userId: string }) {
             disabled={loading}
             className={`p-3 rounded-lg transition ${
               isListening
-                ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                ? 'bg-red-600 hover:bg-red-700 text-white'
                 : 'bg-gray-700 hover:bg-gray-600 text-white'
             } disabled:opacity-50`}
             aria-label="Voice input"

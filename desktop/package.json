@@ -1,0 +1,54 @@
+{
+  "name": "chalo-desktop",
+  "version": "1.0.0",
+  "description": "ChaLo AI Desktop Application",
+  "main": "src/index.ts",
+  "homepage": "./",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "build": "next build",
+    "build:electron": "electron-builder",
+    "package": "npm run build && npm run build:electron",
+    "dist": "npm run build && electron-builder --publish=never"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.1.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "concurrently": "^8.2.1",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.chaloai.desktop",
+    "productName": "ChaLo AI",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "out/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": ["nsis", "portable"],
+      "certificateFile": null,
+      "certificatePassword": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Utility"
+    }
+  }
+}
